@@ -5,6 +5,7 @@ const {
   findPersons,
   findPerson,
   editPerson,
+  makeTransfer,
 } = require("../controllers/person-controller");
 
 // Get All Persons
@@ -17,9 +18,9 @@ router.get("/", async (req, res, next) => {
 //get one person  By ID
 router.get("/:id", async (req, res, next) => {
   const id = req.params.id;
-  const profile = await findPerson(id);
+  const person = await findPerson(id);
   //console.log(profile);
-  res.json(profile);
+  res.json(person);
 });
 //----------------------------------------------------
 // Create new Profile
@@ -31,15 +32,27 @@ router.get("/:id", async (req, res, next) => {
 // });
 
 //----------------------------------------------------
-//patch (Update) profile
+//patch (Update) person
 router.patch("/update/:id", async (req, res, next) => {
   const id = req.params.id;
-  const profile = req.body;
-  await editPerson(id, profile)
+  const person = req.body;
+  await editPerson(id, person)
     .then((doc) => res.json(doc))
     .catch((err) => next(err));
 });
 
+//----------------------------------------------------
+//Make Transfer Route
+//--------------------------------------------
+router.post("/Transfer", async (req, res) => {
+  // const id = req.params.id;
+  const { idSender, amountTransfer, idReceiver } = req.body;
+  await makeTransfer(idSender, amountTransfer, idReceiver)
+    .then((doc) => res.json(doc))
+    .catch((err) => {
+      res.status(500).send(err.message);
+    });
+});
 //----------------------------------------------------
 //Delete profile
 // router.delete("/delete/:id", (req, res, next) => {

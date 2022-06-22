@@ -20,14 +20,14 @@ const personsSchema = new mongoose.Schema(
       required: true,
     },
   },
-  {
-    toJSON: {
-      transform: (doc, ret, options) => {
-        delete ret.__v;
-        return ret;
-      },
-    },
-  }
+  // {
+  //   toJSON: {
+  //     transform: (doc, ret, options) => {
+  //       delete ret.__v;
+  //       return ret;
+  //     },
+  //   },
+  // }
 );
 
 const persons = mongoose.model("Persons", personsSchema);

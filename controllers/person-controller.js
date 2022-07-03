@@ -1,6 +1,6 @@
 const Persons = require("../models/personModel");
 
-const findPersons = (query) => Persons.find(query);
+const findPersons = () => Persons.find();
 const findPerson = (_id) => Persons.findById(_id);
 const findByName = async (ReceiverName) => {
   const receiver = await Persons.findOne({ firstName: ReceiverName });

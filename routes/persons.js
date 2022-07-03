@@ -12,13 +12,13 @@ const {
 
 // Get All Persons
 router.get("/", async (req, res) => {
-  findPersons({})
+  findPersons()
     .then((doc) => res.json(doc))
     .catch((err) => console.log(err));
 });
 
 //get one person  By ID
-router.get("/:id", async (req, res) => {
+router.get("/:id",()=>{} ,async (req, res) => {
   const id = req.params.id;
   const person = await findPerson(id);
   //console.log(profile);
